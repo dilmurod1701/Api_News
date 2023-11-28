@@ -9,6 +9,7 @@ django = "*"
 requests = "*"
 bs4 = "*"
 selenium = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
