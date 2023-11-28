@@ -9,6 +9,9 @@ from .serializers import LoginSerializer, SignupSerializer
 
 
 class LoginView(APIView):
+    """
+    Endpoint for login you need to enter your username and password
+    """
     permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
@@ -21,5 +24,8 @@ class LoginView(APIView):
 
 
 class Signup(CreateAPIView):
+    """
+    Endpoint for signup.You need to enter the username and password
+    """
     serializer_class = SignupSerializer
     permission_classes = [permissions.AllowAny]
