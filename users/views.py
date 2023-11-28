@@ -18,3 +18,8 @@ class LoginView(APIView):
         user = serializer.validated_data['user']
         login(request, user)
         return Response('Muvafaqiiyatli otdingiz')
+
+
+class Signup(CreateAPIView):
+    serializer_class = SignupSerializer
+    permission_classes = [permissions.AllowAny]
