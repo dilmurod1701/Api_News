@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'users',
+    'drf_spectacular',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Django Rest Framework News Api '
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
