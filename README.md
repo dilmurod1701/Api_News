@@ -10,5 +10,6 @@
 2. only POST request http://127.0.0.1:8000/api/login - Endpoint for login
 3. only POST request http://127.0.0.1:8000/api/signup - Endpoint to sign up
 4. only GET request http://127.0.0.1:8000/api/schema/swagger - Show schemes
+5. only GET request http://127.0.0.1:8000/api/search/?day=<day> - searches for news by day
 
 ## the server must be powered on to run the test
