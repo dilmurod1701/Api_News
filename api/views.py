@@ -32,11 +32,13 @@ class News(generics.ListAPIView):
             content = each.find('p', class_='gs-c-promo-summary')
             if content:
                 content = content.get_text(strip=True)
-
-            model = NewsData(title=title, content=content, link=link, day=x)
-            model.save()
-            data.append(model)
-
+            if not NewsData.objects.filter(link=link).exists():
+                model = NewsData(title=title, content=content, link=link, day=x)
+                model.save()
+                data.append(model)
+            else:
+                model = NewsData(title=title, content=content, link=link, day=x)
+                data.append(model)
         second_site = 'https://news.yahoo.com/'
         second_response = requests.get(second_site)
         sup = BeautifulSoup(second_response.content, 'html.parser')
@@ -48,9 +50,13 @@ class News(generics.ListAPIView):
             if content:
                 content = content.get_text(strip=True)
 
-            model = NewsData(title=title, content=content, link=link, day=x)
-            model.save()
-            data.append(model)
+            if not NewsData.objects.filter(link=link).exists():
+                model = NewsData(title=title, content=content, link=link, day=x)
+                model.save()
+                data.append(model)
+            else:
+                model = NewsData(title=title, content=content, link=link, day=x)
+                data.append(model)
 
         return data
 
