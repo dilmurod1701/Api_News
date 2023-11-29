@@ -4,9 +4,10 @@ from django.db import models
 
 
 class NewsData(models.Model):
-    title = models.CharField(max_length=600)
+    title = models.CharField(max_length=2000)
     content = models.TextField(null=True)
-    link = models.URLField(max_length=900)
+    link = models.URLField(max_length=2000)
+    day = models.CharField(max_length=12)
 
     class Meta:
         db_table = 'news'

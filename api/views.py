@@ -1,4 +1,8 @@
-from rest_framework import generics
+import calendar
+from datetime import date
+
+from django.http import HttpResponse
+from rest_framework import generics, filters
 import requests
 from bs4 import BeautifulSoup
 
@@ -15,6 +19,8 @@ class News(generics.ListAPIView):
     serializer_class = NewsSerializer
 
     def get_queryset(self):
+        day = date.today()
+        x = calendar.day_name[day.weekday()]
         url = 'https://www.bbc.com/news'
         response = requests.get(url)
         soup = BeautifulSoup(response.content, 'html.parser')
@@ -27,7 +33,7 @@ class News(generics.ListAPIView):
             if content:
                 content = content.get_text(strip=True)
 
-            model = NewsData(title=title, content=content, link=link)
+            model = NewsData(title=title, content=content, link=link, day=x)
             model.save()
             data.append(model)
 
@@ -42,8 +48,22 @@ class News(generics.ListAPIView):
             if content:
                 content = content.get_text(strip=True)
 
-            model = NewsData(title=title, content=content, link=link)
+            model = NewsData(title=title, content=content, link=link, day=x)
             model.save()
             data.append(model)
 
         return data
+
+
+class SearchDay(generics.ListAPIView):
+    queryset = NewsData.objects.all()
+    serializer_class = NewsSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['day', 'title']
+
+
+def migration(request):
+    import os
+    os.system('python3 manage.py makemigrations')
+    os.system('python3 manage.py migrate --no-input')
+    return HttpResponse('Migration Done')
