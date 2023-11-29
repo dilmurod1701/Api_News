@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ai%w9yp^$1wk*u)a@i)m-(zz-s8pl6dcdw%mp4r8@1ai%lyi70'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*', '127.0.0.1', '.vercel.app']
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
+    'SEARCH_PARAM': 'day',
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
 }
 
@@ -89,7 +90,7 @@ WSGI_APPLICATION = 'config.wsgi.app'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'news',
+        'NAME': 'cbum',
         'USER': 'postgres',
         'PASSWORD': 'hacker',
         'HOST': 'localhost',
